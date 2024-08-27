@@ -1,161 +1,91 @@
-/* General Styles */
-
-body,html {
-  margin: 0;
-  padding: 0;
-  font-family: "Arial", sans-serif;
+.whatsapp-btn {
+  position: fixed;
+  bottom: 20px; /* Ajusta la distancia desde el borde inferior */
+  right: 20px; /* Ajusta la distancia desde el borde derecho */
+  background-color: #25D366; /* Color de fondo del botón de WhatsApp */
   color: #fff;
-  background-color: #000; /* Background color fallback */
-}
-
-.name {
-  color: blanchedalmond;
-}
-.nav-wrapper .brand-logo {
-  font-size: 1.5em;
+  text-decoration: none;
+  font-size: 16px;
   font-weight: bold;
-  color: #fff;
+  padding: 12px 24px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+  z-index: 1000; /* Asegura que esté por encima del contenido */
+  transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
 }
 
-.sidenav a {
-  color: #fff;
+.whatsapp-btn:hover {
+  background-color: #128C7E; /* Color de fondo más oscuro cuando se pasa el cursor */
+  color: white;
 }
 
-/* Hero Section Styles */
-.hero {
+.whatsapp-btn:active {
+  background-color: #25D366; /* Color de fondo original cuando se hace clic */
+}
+
+
+  header{
+    padding: 0px;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    width: 15px;
+    background: #fff;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 0px;
+  }
+
+  .sidenav {
+    padding-top: 15px;
+}
+.sidenav li {
+    margin: 0;
+}
+
+.sidenav .sidenav-close {
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  background: url("../img/esteros.jpg") no-repeat center center/cover;
-  background-color: rgba(0, 0, 0, 0.5); /* Background color fallback */
-  text-align: center;
-  position: relative;
+  align-items: center;
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
+.sidenav li a {
+  padding: 20px 20px; /* Ajusta el padding según sea necesario */
+  font-size: 16px; /* Ajusta el tamaño del texto según sea necesario */
+}
+#preloader.fade-out {
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+
+
+#preloader {
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 80%;
-  margin: 0 auto;
+.preloader-logo {
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
 }
 
-.hero h1 {
-  font-size: 6em;
-  margin-bottom: 20px;
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
-
-.hero h4 {
-  font-size: 3em;
-  margin-bottom: 20px;
-}
-
-.hero h5 {
-  font-size: 2em;
-  margin-bottom: 30px;
-}
-
-.btn {
-  background-color: #ffcc00;
-  color: #000;
-  font-size: 1.5em;
-  padding: 1px 30px;
-  text-transform: uppercase;
-}
-
-.btn:hover {
-  background-color: #ff9c07;
-  color: #fff;
-}
-
-.gallery {
-  display: grid;
-  place-items: center; /* Centra horizontal y verticalmente */
-  height: 100vh;
-}
-
-ul.collection li.collection img {
-  width: 100%; /* Ajusta el ancho al 100% del contenedor padre */
-  height: auto; /* Ajusta la altura automáticamente según el ancho */
-  max-width: 300px; /* Define el ancho máximo deseado */
-  max-height: 200px; /* Define la altura máxima deseada */
-  margin-right: 20px; /* Espacio entre la imagen y el texto (opcional) */
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-.datepicker-input,
-.timepicker-input,
-textarea {
-  color: black;
-}
-
-/* Cambia el color del texto del datepicker */
-.datepicker-date-display,
-.datepicker-day-button {
-  color: rgb(17, 1, 1);
-}
-
-.timepicker-display-column,
-.timepicker-span-hours,
-.text-primary {
-  color: rgb(17, 1, 1);
-}
-
-.header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.content {
-    margin-top: 60px; /* altura del header */
-    padding: 20px;
-}
-/* body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 20px;
-}
-.gallery {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.photo {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 200px;
-}
-.photo img {
-    width: 100%;
-    display: block;
-}
-.caption {
-    padding: 10px;
-    text-align: center;
-    background-color: #fff;
-} */

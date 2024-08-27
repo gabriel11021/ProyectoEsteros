@@ -1,129 +1,600 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú - Los Esteros</title>
-    <!-- Materialize CSS CDN -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/barra.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">                                                        
-    <link rel="stylesheet" href="css/img.css">
-</head>
-<body class="light-green lighten-4">
-  <div class="si">
-    <header>
-        <nav class="nav-extended light-red lighten-3">
-            <div class="nav-wrapper container">
-                <a href="" class="brand-logo black-text"><i class="material-icons right">restaurant</i>Los Esteros</a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="index.html" class="black-text"><i class="material-icons right black-text">home</i>Inicio</a></li>
-                    <li><a href="menu.html" class="black-text"><i class="material-icons right black-text">menu_book</i>Menú</a></li>
-                    <li><a href="reservacion.html" class="black-text"><i class="material-icons right black-text">bookmarks</i>Reservaciones</a></li>
-                    <li><a href="contacto.html" class="black-text"><i class="material-icons right black-text">call</i>Contacto</a></li>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Menu Los Esteros</title> <!-- Título de la página -->
+
+        <!-- Enlaces a hojas de estilo CSS -->
+        <link rel="stylesheet" href="css/menu.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/barrados.css">
+        <link rel="stylesheet" href="css/footer.css">
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"> <!--LINK DE BOSTRAP-->
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+
+    <body>
+
+        <div id="preloader">
+            <img src="imag/estero.png" alt="Logo" class="preloader-logo">
+        </div>
+
+        <div id="inicio2"> <!-- Sección de inicio del menú -->
+            <header>
+                <nav class="nav-extended amber lighten-2">
+                    <div class="nav-wrapper container">
+                        <!-- Botón de menú para dispositivos móviles -->
+                        <a href class="brand-logo black-text titulomenu"><i
+                                class="material-icons right">restaurant</i>El
+                            Estero</a>
+                        <!-- Botón de menú para dispositivos móviles -->
+                        <a href="#" data-target="mobile-demo"
+                            class="sidenav-trigger black-text"><i
+                                class="material-icons">menu</i></a>
+                        <ul class="right hide-on-med-and-down">
+                            <div class="navbar">
+                                <li><a href="index.html "><i
+                                            class="material-icons right">home</i>Inicio</a></li>
+                                <li><a href="#inicio2"><i
+                                            class="material-icons right">menu_book</i>Menú</a></li>
+                                <li><a href="#carnes"><i
+                                            class="material-icons right">kebab_dining</i>Carnes</a></li>
+                                <li><a href="#platoscarta"><i
+                                            class="material-icons right">ramen_dining</i>Platos
+                                        a la Carta</a></li>
+                                <li><a href="#picadas"><i
+                                            class="material-icons right">savings</i>Picadas</a></li>
+                                <li><a href="#adicionales"><i
+                                            class="material-icons right">post_add</i>Adicionales</a></li>
+                                <li><a href="#contactos"><i
+                                            class="material-icons right">phone</i>Contactos</a></li>
+                            </div>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- Botón para mostrar el carrito -->
+                <button id="cart-toggle" class="cart-toggle"> <i
+                        class="material-icons ">shopping_cart</i>
+                    Carrito (<span id="cart-count">0</span>)
+                </button>
+                <!-- Popup para realizar reservas -->
+                <div class="reserve-popup" id="reserve-popup">
+                    <button class="close-reserve-popup">&times;</button>
+                    <h2 class="titulofooter">Reservar</h2>
+                    <div id="reserve-cart-items">
+                        <ul class="reserve-cart-items-list black-text"></ul>
+                    </div>
+                    <!-- Formulario de reservas -->
+                    <form id="reserve-form" class="container">
+                        <input type="text" id="first-name" name="first-name"
+                            placeholder="Nombre" class="formulariouno" required>
+                        <input type="text" id="last-name" name="last-name"
+                            placeholder="Apellido" class="formulariouno"
+                            required>
+                        <input type="email" id="email" name="email"
+                            placeholder="Correo" class="formulariouno" required>
+                        <input type="date" id="date" name="date"
+                            placeholder="Fecha" class="formulariouno" required>
+                        <input type="time" id="time" name="time"
+                            placeholder="Hora" class="formulariouno" required>
+                        <input type="people" id="people" name="people"
+                            placeholder="Cantidad de Personas"
+                            class="formulariouno" required>
+                        <textarea id="comments" name="comments"
+                            placeholder="Comentarios"
+                            class="formulariouno"></textarea>
+                        <ul class="reserve-cart-items-list"></ul>
+                        <button id="send-to-whatsapp"
+                            class="formulariouno">Enviar a WhatsApp</button>
+                    </form>
+
+                </header>
+                <br><br><br>
+                <!-- Menú lateral para dispositivos móviles -->
+                <ul class="sidenav" id="slide-out">
+                    <br> <br><br><br>
+                    <li><a href="index.html" class="sidenav-close"><i
+                                class="material-icons">home</i>Inicio</a></li>
+                    <li><a href="#inicio2" class="sidenav-close"><i
+                                class="material-icons">menu_book</i>Menú</a></li>
+                    <li><a href="#carnes" class="sidenav-close"><i
+                                class="material-icons">kebab_dining</i>Carnes</a></li>
+                    <li><a href="#platoscarta" class="sidenav-close"><i
+                                class="material-icons">ramen_dining</i>Platos a
+                            la Carta</a></li>
+                    <li><a href="#picadas" class="sidenav-close"><i
+                                class="material-icons">savings</i>Picadas</a></li>
+                    <li><a href="#adicionales" class="sidenav-close"><i
+                                class="material-icons">post_add</i>Adicionales</a></li>
+                    <li><a href="#contactos" class="sidenav-close"><i
+                                class="material-icons">phone</i>Contactos</a></li>
+
                 </ul>
             </div>
-        </nav>
-    </header>
-    </div>
-    <div class="content">
-    <div class="center">
-         <h2 class="black-text">Menú<i class="material-icons">menu_book</i></h2>
-         <p class="black-text">Explora nuestro variado menú, lleno de sabores internacionales y locales que deleitarán tu paladar.</p>
-    </div>
-    <div class="container">
-        <h4 class="black-text">Entradas<i class="material-icons">cake</i></h4>
-    </div>
-            <div class="row container">
-                <div class="col s12 container"></div> <br>
-                <div class="col s6 center-align"> <br>
-                  <p class="black-text">Ensalada Personal</p>
-                  <img src="imag/carga.png" alt="" width="150px">
-                  <p class="white black-text">es una esalda personal con lechuga verde y morada, tomate, cebolla y pepino</p>
-                </div> <br>
-                <div class="col s6 center-align">
-                  <p class="black-text">Dedos De Queso</p>
-                  <img src="imag/carga.png" alt="" width="150px"></a>
-                  <p class="white black-text">Deliciosos dedos rellenos de queso acompñados de una salsa de ajo</p>
-                </div>
-              </div>
-              <div class="row container">
-                <div class="col s12 container"></div> <br>
-                <div class="col s6 center-align"> <br>
-                  <p class="black-text">Empanadas</p>
-                  <img src="imag/carga.png" alt="" width="150px">
-                  <p class="white black-text">Empanadas orneadas a leña de pollo o carne</p>
-                </div>
-            </div> 
-                  <div class="container">
-                    <h4 class="black-text">Platos Principales<i class="material-icons">ramen_dining</i></h4>
-                </div>  
-                <div class="row container">
-                    <div class="col s12 container"></div> <br>
-                    <div class="col s6 center-align"> <br>
-                      <p class="black-text">Carne a la llanera</p>
-                      <img src="imag/carga.png" alt="" width="150px">
-                      <p class="white black-text">es una maravillosa carne tierna muy jugosa</p>
-                    </div> <br>
-                    <div class="col s6 center-align">
-                      <p class="black-text">Chata</p>
-                      <img src="imag/carga.png" alt="" width="150px"></a>
-                      <p class="white black-text">chata acompañada de papa criolla</p>
+            <main>
+                <!-- Sección de carnes -->
+                <div id="carnes">
+                    <div class="titulo orange lighten-1">
+                        <h1>CARNES</h1>
                     </div>
-                  </div>
-                  <div class="row container">
-                    <div class="col s12 container"></div> <br>
-                    <div class="col s6 center-align"> <br>
-                      <p class="black-text">Asado</p>
-                      <img src="imag/carga.png" alt="" width="150px">
-                      <p class="white black-text">jugosa carne asada con pechuga ala plancha con platano maduro y papa</p>
-                    </div>
-                </div> 
-                <div class="container">
-                    <h4 class="black-text">Postres<i class="material-icons">icecream</i></h4>
-                </div> 
-                <div class="row container">
-                    <div class="col s12 container"></div> <br>
-                    <div class="col s6 center-align"> <br>
-                      <p class="black-text">Postre De Fresa</p>
-                      <img src="imag/carga.png" alt="" width="150px">
-                      <p class="white black-text">Deliciosos Postres de fresa</p>
-                    </div> <br>
-                    <div class="col s6 center-align">
-                      <p class="black-text">Postres De Maracuya</p>
-                      <img src="imag/carga.png" alt="" width="150px"></a>
-                      <p class="white black-text">Postre de marcuya</p>
-                    </div>
-                  </div>
-                  <div class="row container">
-                    <div class="col s12 container"></div> <br>
-                    <div class="col s6 center-align"> <br>
-                      <p class="black-text">Tiramisu</p>
-                      <img src="imag/carga.png" alt="" width="150px">
-                      <p class="white black-text">Delicioso Postre de cafe</p>
-                    </div>
-                </div>
-                <div class="black">
-                    <div class="center">
-                        <h1>Mas Informacion..</h1>
-                        <p>redes sociales</p>
-                        <p>descripcion</p>
-                        <p>ect</p>
-                    </div>
-                </div>
-                </div>
 
-    <!-- Materialize JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems);
-        });
+                    <div class="product-list">
+
+                        <div class="product">
+                            <h5>Carne Mixta</h5> <br>
+                            <img src="imag/carnemixta.png"
+                                alt="imag/carnemixta.png"> <br>
+                            <p>Precio: $30.000</p>
+                            <button class="add-to-cart" data-name="Carne Mixta"
+                                data-price="30.000"
+                                data-img="imag/carnemixta.png">Añadir al
+                                Carrito</button>
+                        </div>
+
+                        <!-- BOTON -->
+
+                        <div id="product-modal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2 id="modal-title"></h2>
+                                <img id="modal-image" src alt>
+                                <p id="modal-price"></p>
+                                <button class="add-to-cart"
+                                    id="modal-add-to-cart">Añadir al
+                                    Carrito</button>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <h5>Carne de Chigüiro</h5> <br>
+                            <img src="imag/carnechiguiro.png"
+                                alt="imag/carnechiguiro.png"> <br>
+                            <p>Precio: $30.000</p>
+                            <button class="add-to-cart"
+                                data-name="Carne de Chigüiro"
+                                data-price="30.000"
+                                data-img="imag/carnechiguiro.png">Añadir al
+                                Carrito</button>
+                        </div>
+                        <div class="product">
+                            <h5>Mamona</h5> <br>
+                            <img src="imag/mamona.png" alt="imag/mamona.png">
+                            <br>
+                            <p>Precio: $30.000</p>
+                            <button class="add-to-cart" data-name="Mamona"
+                                data-price="30.000"
+                                data-img="imag/mamona.png">Añadir al
+                                Carrito</button>
+                        </div>
+                        <div class="product">
+                            <h5>Costillas de Cerdo</h5> <br>
+                            <img src="imag/costillascerdo.png"
+                                alt="imag/costillascerdo.png"> <br>
+                            <p>Precio: $32.000</p>
+                            <button class="add-to-cart"
+                                data-name="Costillas de Cerdo"
+                                data-price="32.000"
+                                data-img="imag/costillascerdo.png">Añadir al
+                                Carrito</button>
+                        </div>
+                        <div class="product">
+                            <h5>1/2 Carne</h5>
+                            <p>Las carnes van acompañadas de yuca, papa salada,
+                                platano y arepa</p>
+                            <img src="imag/carne.png" alt="imag/carne.png"> <br>
+                            <p>Precio: $20.000</p>
+                            <button class="add-to-cart" data-name="1/2 Carne"
+                                data-price="20.000"
+                                data-img="imag/carne.png">Añadir al
+                                Carrito</button>
+                        </div>
+
+                        <div class="cart" id="cart">
+                            <button class="close-cart">&times;</button>
+                            <h4 class="titulofooter">Tu Carta</h4>
+                            <ul class="cart-items"></ul>
+                            <p>Total: $<span class="total">0.000</span></p>
+                            <button class="checkout"
+                                id="checkoutSection">Checkout</button>
+                        </div>
+
+                        <!-- PLATOS A LA CARTA -->
+                    </div>
+                    <div id="platoscarta">
+                        <div class="titulo orange lighten-1">
+                            <h1>PLATOS A LA CARTA</h1>
+                        </div>
+
+                        <div class="product-list">
+
+                            <div class="product">
+                                <h5>Churrasco</h5> <br>
+                                <img src="imag/churrasco.png"
+                                    alt="imag/churrasco.png"> <br>
+                                <p>Precio: $27.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Churrasco" data-price="27.000"
+                                    data-img="imag/churrasco.png">Añadir al
+                                    Carrito</button>
+                            </div>
+                            <div id="product-modal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <h2 id="modal-title"></h2>
+                                    <img id="modal-image" src alt>
+                                    <p id="modal-price"></p>
+                                    <button class="add-to-cart"
+                                        id="modal-add-to-cart">Añadir al
+                                        Carrito</button>
+                                </div>
+                            </div>
+                            <div class="product">
+                                <h5>Costillas BBQ</h5> <br>
+                                <img src="imag/costillasbbq.png"
+                                    alt="imag/costillasbbq.png"> <br>
+                                <p>Precio: $32.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Costillas BBQ "
+                                    data-price="32.000"
+                                    data-img="imag/costillasbbq.png" S>Añadir al
+                                    Carrito</button>
+                            </div>
+                            <div class="product">
+                                <h5>Pechuga Gratinada</h5> <br>
+                                <img src="imag/pechugagra.png"
+                                    alt="imag/pechugagra.png"> <br>
+                                <p>Precio: $24.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Pechuga Gratinada"
+                                    data-price="24.000"
+                                    data-img="imag/pechugagra.png">Añadir al
+                                    Carrito</button>
+                            </div>
+                            <div class="product">
+                                <h5>Pechuga a la Plancha</h5> <br>
+                                <img src="imag/pechugaplan.png"
+                                    alt="imag/pechugaplan.png"> <br>
+                                <p>Precio: $24.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Pechuga a la Plancha"
+                                    data-price="24.000"
+                                    data-img="imag/pechugaplan.png">Añadir al
+                                    Carrito</button>
+                            </div>
+                            <div class="product">
+                                <h5>Mojarra Frita</h5> <br>
+                                <img src="imag/mojarra.png"
+                                    alt="imag/mojarra.png"> <br>
+                                <p>Precio: $24.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Mojarra Frita"
+                                    data-price="24.000"
+                                    data-img="imag/mojarra.png">Añadir al
+                                    Carrito</button>
+                            </div>
+                            <div class="product">
+                                <h5>Trucha al Ajillo</h5> <br>
+                                <img src="imag/truchaaji.png" alt> <br>
+                                <p>Precio: $26.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Trucha al Ajillo"
+                                    data-price="26.000"
+                                    data-img="imag/truchaaji.png">Añadir al
+                                    Carrito</button>
+                            </div>
+                            <div class="product">
+                                <h5>Trucha Gratinada</h5> <br>
+                                <img src="imag/truchagra.png"
+                                    alt="imag/truchagra.png"> <br>
+                                <p>Precio: $26.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Trucha Gratinada"
+                                    data-price="26.000"
+                                    data-img="imag/truchagra.png">Añadir al
+                                    Carrito</button>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+
+                            <div class="cart" id="cart">
+                                <button class="close-cart">&times;</button>
+                                <h2>Carrito</h2>
+                                <ul class="cart-items"></ul>
+                                <p>Total: $<span class="total">0.000</span></p>
+                            </div>
+
+                            <div class="sopa"><h3 class="descrip">SOPAS DEL DIA
+                                    A 15.000</h3></div>
+                            <button class="add-to-cart" data-name="sopa"
+                                data-price="15.000"
+                                data-img="imag/sopa.png">Añadir al
+                                Carrito</button>
+
+                        </div>
+
+                        <!-- Sección de picadas -->
+
+                        <div id="picadas"> </div>
+                        <div class="titulo orange lighten-1">
+
+                            <h1>PICADAS</h1>
+                        </div>
+
+                        <div class="product-list">
+
+                            <div class="product">
+                                <h5>Picada 1</h5>
+                                <p>Rellena, longaniza y papa criolla</p> <br>
+                                <img src="imag/picadasua.png"
+                                    alt="imag/picadasua.png"> <br>
+                                <p>Precio: $20.000</p>
+                                <button class="add-to-cart" data-name="Picada 1"
+                                    data-price="20.000"
+                                    data-img="imag/picadasua.png">Añadir al
+                                    Carrito</button> <br>
+                                <br>
+                            </div>
+                            <div class="product">
+                                <h5>Picada 2</h5>
+                                <p>Carne, rellena, longaniza, papa criolla, papa
+                                    salada, yuca y platano</p>
+                                <img src="imag/picada.png" alt> <br>
+                                <p>Precio: Desde $30.000 en adelante</p>
+                                <button class="add-to-cart" data-name="Picada 2"
+                                    data-price="30.000"
+                                    data-img="imag/picada.png">Añadir al
+                                    Carrito</button> <br>
+                                <br> <br>
+                            </div>
+                            <div class="product">
+                                <h5>Picada 3</h5>
+                                <p>Carne, gallina, rellena, longaniza, papa
+                                    criolla, papa salada, yuca, platano y
+                                    arepa</p>
+                                <img src="imag/picadagalli.png"
+                                    alt="imag/picadagalli.png"> <br>
+                                <p>Precio: Desde $45.000 en adelante</p>
+                                <button class="add-to-cart" data-name="Picada 3"
+                                    data-price="45.000"
+                                    data-img="imag/picadagalli.png">Añadir al
+                                    Carrito</button> <br>
+                                <br> <br>
+                            </div>
+                            <div class="product">
+                                <h5>Porcion de Rellena</h5>
+                                <p>papa criolla o salda</p> <br>
+                                <img src="imag/rellena.png" alt> <br>
+                                <p>Precio: $10.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Porcion de Rellena"
+                                    data-price="10.000"
+                                    data-img="imag/rellena.png">Añadir al
+                                    Carrito</button>
+                            </div>
+                            <div class="product">
+                                <h5>Porcion de Longaniza</h5>
+                                <p>papa criolla o salada</p> <br>
+                                <img src="imag/longaniza.png" alt> <br>
+                                <p>Precio: $10.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Porcion de Longaniza"
+                                    data-price="10.000"
+                                    data-img="imag/longaniza.png">Añadir al
+                                    Carrito</button> <br>
+                                <br>
+                            </div>
+
+                            <div id="adicionales"></div>
+
+                            <!-- Sección de adicionales -->
+
+                            <div class="titulo orange lighten-1">
+                                <h1>ADICIONALES</h1>
+                            </div>
+
+                            <div class="product">
+                                <h5>Papa Francesa</h5> <br>
+                                <img src="imag/papafrancesa.png"
+                                    alt="imag/papafrancesa.png"> <br>
+                                <p>Precio: $4.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Papa Francesa" data-price="4.000"
+                                    data-img="imag/papafrancesa.png">Añadir al
+                                    Carrito</button> <br>
+                                <br>
+                            </div>
+                            <div class="product">
+                                <h5>Yuca</h5> <br>
+                                <img src="imag/yuca.png" alt> <br>
+                                <p>Precio: $4.000</p>
+                                <button class="add-to-cart" data-name="Yuca"
+                                    data-price="4.000"
+                                    data-img="imag/yuca.png">Añadir al
+                                    Carrito</button> <br>
+                                <br>
+                            </div>
+                            <div class="product">
+                                <h5>Papa Salada</h5> <br>
+                                <img src="imag/papasalda.png" alt> <br>
+                                <p>Precio: $4.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Papa Salada" data-price="4.000"
+                                    data-img="imag/papasalda.png">Añadir al
+                                    Carrito</button> <br>
+                                <br>
+                            </div>
+                            <div class="product">
+                                <h5>Papa Criolla</h5> <br>
+                                <img src="imag/papacriolla.png" alt> <br>
+                                <p>Precio: $5.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Papa Criolla" data-price="5.000"
+                                    data-img="imag/papacriolla.png">Añadir al
+                                    Carrito</button> <br>
+                                <br>
+                            </div>
+                            <div class="product">
+                                <h5>Arroz</h5> <br>
+                                <img src="imag/arroz.png" alt="imag/arroz.png">
+                                <br>
+                                <p>Precio: $3.500</p>
+                                <button class="add-to-cart" data-name="Arroz"
+                                    data-price="3.500"
+                                    data-img="imag/arroz.png">Añadir al
+                                    Carrito</button> <br>
+                                <br>
+                            </div>
+                            <div class="product">
+                                <h5>Guacamole</h5> <br>
+                                <img src="imag/guacamole.png"
+                                    alt="imag/guacamole.png"> <br>
+                                <p>Precio: $4.000</p>
+                                <button class="add-to-cart"
+                                    data-name="Guacamole" data-price="4.000"
+                                    data-img="imag/guacamole.png">Añadir al
+                                    Carrito</button> <br>
+                                <br>
+                            </div>
+                            <div class="product">
+                                <h5>Arepa Boyacense</h5> <br>
+                                <img src="imag/arepaboya.png"
+                                    alt="imag/arepaboya.png"> <br>
+                                <p>Precio: $2.500</p>
+                                <button class="add-to-cart"
+                                    data-name="Arepa Boyacense"
+                                    data-price="2.500"
+                                    data-img="imag/arepaboya.png">Añadir al
+                                    Carrito</button> <br>
+                                <br>
+                            </div>
+                        </div>
+
+                    </main>
+
+                    <!-- Botón flotante para contactar por WhatsApp -->
+
+                    <a class="whatsapp-btn" href="https://wa.me/3229134464"
+                        target="_blank">Contactar por WhatsApp</a>
+
+                    <!-- Pie de página -->
+
+                    <footer>
+                        <div class="section" id="contactos">
+                            <footer class="page-footer amber lighten-2">
+                                <div class="container"><img
+                                        src="imag/estero.png"
+                                        alt="logo" width="150px"
+                                        class="imagen-con-margen"></div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col l6 s12">
+                                            <h5
+                                                class="black-text titulofooter">Restaurante
+                                                El
+                                                Estero</h5>
+                                            <p class="black-text">La mejor
+                                                experiencia gastronómica.</p>
+                                        </div>
+                                        <div class="right">
+                                            <div class="social-icons">
+                                                <a
+                                                    href="https://www.facebook.com/profile.php?id=100085529827090&mibextid=ZbWKwL"
+                                                    target="_blank">
+                                                    <i
+                                                        class="fab fa-facebook-f"></i>
+                                                </a>
+                                                <a
+                                                    href="https://maps.app.goo.gl/QEQLfuq57AzE1LoF9"
+                                                    target="_blank">
+                                                    <i
+                                                        class="fas fa-map-marker-alt"></i>
+                                                </a>
+                                            </div>
+
+                                            <!-- Enlaces de navegación del pie de página -->
+
+                                            <ul class="footer-links">
+                                                <li><a
+                                                        href="index.html">Inicio</a></li>
+                                                <li><a
+                                                        href="menu.html">Menú</a></li>
+                                                <li><a
+                                                        href="#carnes">Carnes</a></li>
+                                                <li><a
+                                                        href="#platoscarta">Platos
+                                                        a la Carta</a></li>
+                                                <li><a
+                                                        href="#picadas">Picadas</a></li>
+                                                <li><a
+                                                        href="#adicionales">Adicionales</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Copyright del pie de página -->
+
+                                <div class="footer-copyright orange lighten-1">
+                                    <div class="container black-text">
+                                        © 2024 Restaurante El Estero. Todos los
+                                        derechos reservados.
+                                    </div>
+                                </div>
+                                <link
+                                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+                                    rel="stylesheet">
+                            </footer>
+
+                            <!-- Scripts necesarios -->
+                            <script
+                                src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                            <!-- jQuery -->
+                            <script
+                                src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+                            <!-- Materialize JS -->
+                            <script
+                                src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+                            <!-- Bootstrap JS -->
+                            <script src="script.js"></script>
+                            <!-- Script personalizado -->
+
+                            <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Recuperar los datos de localStorage
+        const nombre = localStorage.getItem('nombre');
+        const apellido = localStorage.getItem('apellido');
+        const correo = localStorage.getItem('correo');
+    
+        // Si los datos están disponibles, asignarlos a los campos del formulario
+        if (nombre && apellido && correo) {
+            document.getElementById('first-name').value = nombre;
+            document.getElementById('last-name').value = apellido;
+            document.getElementById('email').value = correo;
+        }
+    });
     </script>
-</body>
-</html>
+
+                            <script>
+     window.addEventListener("load", function() {
+        setTimeout(function() {
+            document.body.classList.remove("loading");
+            document.getElementById("preloader").style.display = "none";
+        }, 1000); // Retraso de 3 segundos
+    });
+ </script>
+
+                        </body>
+                    </html>
